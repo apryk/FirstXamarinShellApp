@@ -14,10 +14,18 @@
         <viewmodels:CoffeeEquipmentViewModel/>
     </ContentPage.BindingContext>
 
-    <ListView BackgroundColor="Transparent"
-              ItemsSource="{Binding Coffee}"
+    <ListView
+        CachingStrategy="RecycleElement"
+        BackgroundColor="Transparent"
+              ItemsSource="{Binding CoffeeGroups}"
+              IsGroupingEnabled="True"
+              GroupDisplayBinding="{Binding Key}"
+              IsPullToRefreshEnabled="True"
               HasUnevenRows="True"         
-              SeparatorVisibility="None">
+              SeparatorVisibility="None"
+              IsRefreshing="{Binding IsBusy,Mode=OneWay}"
+              RefreshCommand="{Binding RefreshCommand}"
+              RefreshControlColor="MediumVioletRed">
         <ListView.Header>
             <StackLayout Orientation="Horizontal">
                 <Label HorizontalOptions="Center"
